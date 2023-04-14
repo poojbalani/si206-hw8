@@ -41,9 +41,25 @@ def plot_rest_categories(db):
     """
     conn = sqlite3.connect(db)
     cur = conn.cursor()
-    cur.execute("SELECT categories.category AS category, restaurants.name FROM restaurants WHERE restaurants.category_id = categories.category_id")
+    cur.execute("SELECT categories.category, COUNT(restaurants.name) FROM restaurants JOIN categories ON categories.id = restaurants.category_id GROUP BY category_id ORDER BY category")
     results = cur.fetchall()
     print(results)
+    y_count = []
+    x_name = []
+    for result in results:
+        y_count.append(result[1])
+        x_name.append(result[0])
+    print(y_count)
+    print(x_name)
+    fig, ax = plt.subplots(figsize = (20,7.5))
+    plt.yticks(fontsize = 7.5)
+    ax.barh(x_name,y_count)
+    ax.set_xlabel('Number of Restaurants')
+    ax.set_ylabel('Restaurant Categories')
+    ax.set_title('Types of Restaurants on South University Ave')
+    plt.show()
+
+
     
 
 def find_rest_in_building(building_num, db):
