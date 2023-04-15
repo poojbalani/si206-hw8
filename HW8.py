@@ -1,5 +1,5 @@
 # Your name: Pooja Balani 
-# Your student id:
+# Your student id: 
 # Your email: pbalani@umich.edu
 # List who you have worked with on this homework:
 
@@ -92,7 +92,10 @@ def get_highest_rating(db): #Do this through DB as well
     The second bar chart displays the buildings along the y-axis and their ratings along the x-axis 
     in descending order (by rating).
     """
-    pass
+    conn = sqlite3.connect(db)
+    cur = conn.cursor()
+    finalList = []
+    # cur.execute("SELECT categories.category FROM categories JOIN restaurants ON restaurants.rating = ")
 
 #Try calling your functions here
 def main():
